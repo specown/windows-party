@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using WindowsParty.Helpers;
+using WindowsParty.Interfaces;
 using WindowsParty.ViewModels;
 
 namespace WindowsParty
@@ -20,7 +22,9 @@ namespace WindowsParty
             _simpleContainer = new SimpleContainer();
 
             _simpleContainer.Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAuthenticationHelper, AuthenticationHelper>()
+                .Singleton<IWebTasks, WebTasks>();
 
 
             _simpleContainer.PerRequest<ShellViewModel>()
