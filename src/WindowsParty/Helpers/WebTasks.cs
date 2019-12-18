@@ -15,21 +15,23 @@ namespace WindowsParty.Helpers
     public class WebTasks : IWebTasks
     {
         private RestClient _restClient;
+        private AuthModel _authModel;
+        private List<ServerModel> _serverList;
 
         public async Task<AuthModel> AuthenticateUser(UserModel userModel)
         {
             _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
 
-            RestRequest restRequest = BuildRestRequest(userModel);
+            RestRequest restRequest = BuildAuthRequest(userModel);
 
             var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
 
-            AuthModel authResponse = JsonConvert.DeserializeObject<AuthModel>(restResponse.Content);
+            _authModel = JsonConvert.DeserializeObject<AuthModel>(restResponse.Content);
 
-            return authResponse;
+            return _authModel;
         }
 
-        private RestRequest BuildRestRequest(UserModel userModel)
+        private RestRequest BuildAuthRequest(UserModel userModel)
         {
             var restRequest = new RestRequest(ConfigurationManager.AppSettings["baseUrl"] + ConfigurationManager.AppSettings["tokenPath"], Method.POST, DataFormat.Json)
             {
@@ -46,9 +48,26 @@ namespace WindowsParty.Helpers
             return restRequest;
         }
 
-        public Task<List<ServerModel>> RetrieveServerList(AuthModel authModel)
+        public async Task<List<ServerModel>> RetrieveServerList()
         {
-            throw new NotImplementedException();
+            _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
+
+            RestRequest restRequest = BuildServerRequest(_authModel);
+
+            var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
+
+            _serverList = JsonConvert.DeserializeObject<List<ServerModel>>(restResponse.Content);
+
+            return _serverList;
+        }
+
+        private RestRequest BuildServerRequest(AuthModel authModel)
+        {
+            var restRequest = new RestRequest(ConfigurationManager.AppSettings["baseUrl"] + ConfigurationManager.AppSettings["serverPath"], Method.GET, DataFormat.Json);
+
+            restRequest.AddHeader("Authorization", "Bearer " + authModel.AuthToken);
+
+            return restRequest;
         }
     }
 }
