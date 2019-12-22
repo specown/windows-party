@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Events\EventModel.cs" />
     <Compile Include="Events\Status.cs" />
     <Compile Include="Helpers\AuthenticationHelper.cs" />

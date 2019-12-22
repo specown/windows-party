@@ -31,10 +31,10 @@ namespace WindowsParty.ViewModels
             base.OnActivate();
 
             //On activation - call RetrieveServerList method
-            AddServers(await RetrieveServerList());
+            await RetrieveServerList();
         }
 
-        private void AddServers(List<ServerModel> serverList)
+        internal void AddServers(List<ServerModel> serverList)
         {
             foreach(var server in serverList)
             {
@@ -51,7 +51,7 @@ namespace WindowsParty.ViewModels
             }
         }
 
-        public async Task<List<ServerModel>> RetrieveServerList()
+        public async Task RetrieveServerList()
         {
             try
             {
@@ -60,7 +60,7 @@ namespace WindowsParty.ViewModels
                 //Check if returned server list has any servers
                 if (serverList != null && serverList.Count > 0)
                 {
-                    return serverList;
+                    AddServers(serverList);
                 }
                 else
                 {
