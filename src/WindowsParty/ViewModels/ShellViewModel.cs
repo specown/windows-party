@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using WindowsParty.Events;
+using WindowsParty.Interfaces;
 
 namespace WindowsParty.ViewModels
 {
@@ -25,6 +26,7 @@ namespace WindowsParty.ViewModels
             ActivateItem(_loginViewModel);
         }
 
+        //Activate page based on EventModel
         public void Handle(EventModel eventMessage)
         {
             switch (eventMessage.Status)
@@ -34,7 +36,8 @@ namespace WindowsParty.ViewModels
                     break;
 
                 case Status.Logout:
-                    ActivateItem(_loginViewModel);
+                    IoC.Get<IAuthenticationHelper>().LogOut();
+                    ActivateItem(IoC.Get<LoginViewModel>());
                     break;
 
                 default:
