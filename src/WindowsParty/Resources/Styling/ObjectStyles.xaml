@@ -14,7 +14,15 @@
         <Setter Property="Margin" Value="8"/>
     </Style>
     
-    <Style TargetType="toolkit:WatermarkTextBox" x:Key="inputBox">
+    <Style TargetType="toolkit:WatermarkTextBox" x:Key="usernameInputBox">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{StaticResource textFont}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="toolkit:WatermarkPasswordBox" x:Key="passwordInputBox">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontFamily" Value="{StaticResource textFont}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

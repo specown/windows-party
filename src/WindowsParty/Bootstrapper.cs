@@ -6,6 +6,7 @@ using WindowsParty.Helpers;
 using WindowsParty.Interfaces;
 using WindowsParty.Logging;
 using WindowsParty.ViewModels;
+using Xceed.Wpf.Toolkit;
 
 namespace WindowsParty
 {
@@ -31,6 +32,8 @@ namespace WindowsParty
             _simpleContainer.PerRequest<ShellViewModel>()
                 .PerRequest<LoginViewModel>()
                 .PerRequest<ServerListViewModel>();
+
+            ConventionManager.AddElementConvention<WatermarkPasswordBox>(PasswordBoxHelper.BoundPasswordProperty, "Password", "PasswordChanged");
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
