@@ -61,7 +61,7 @@ namespace WindowsParty.ViewModels
             }
         }
 
-        public AuthModel AuthModel { get; private set; }
+        internal AuthModel AuthModel { get; private set; }
 
         public async Task AuthUser()
         {
@@ -92,7 +92,7 @@ namespace WindowsParty.ViewModels
             }
         }
 
-        private bool validateInput()
+        internal bool validateInput()
         {
             //Check if the user has typed anything in
             //If more details would've been given - could have used regex to filter out incorrect formats
