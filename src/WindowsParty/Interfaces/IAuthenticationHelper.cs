@@ -5,6 +5,10 @@ namespace WindowsParty.Interfaces
 {
     public interface IAuthenticationHelper
     {
-        Task AuthenticateUser(UserModel userModel);
+        Task<AuthModel> AuthenticateUser(UserModel userModel);
+
+        AuthModel AuthModel{ get; }
+
+        void LogOut();
     }
 }

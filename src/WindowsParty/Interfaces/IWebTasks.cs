@@ -8,6 +8,6 @@ namespace WindowsParty.Interfaces
     {
         Task<AuthModel> AuthenticateUser(UserModel userModel);
 
-        Task<List<ServerModel>> RetrieveServerList();
+        Task<List<ServerModel>> RetrieveServerList(AuthModel authModel);
     }
 }
