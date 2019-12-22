@@ -9,17 +9,19 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{StaticResource BackgroundColor}">
     <Grid>
-        
-    <!--Set Background image-->
-    <Grid.Background>
-        <ImageBrush ImageSource="{StaticResource Background}" Stretch="UniformToFill"/>
-    </Grid.Background>
-        
+
+        <!--Set Background image-->
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource Background}" Stretch="UniformToFill"/>
+        </Grid.Background>
+
         <Grid VerticalAlignment="Center">
 
             <StackPanel HorizontalAlignment="Center">
                 <Image Source="{StaticResource Logotype}" Width="246" Margin="64"/>
 
+                <TextBlock Name="ErrorLabel" Style="{StaticResource ErrorLabel}" Text="{Binding ErrorMessage}" Visibility="{Binding ErrorDisplayed}" Margin="30,0,30,0" VerticalAlignment="Center"/>
+                
                 <Border Style="{StaticResource inputBorder}">
                     <toolkit:WatermarkTextBox x:Name="Username" Style="{StaticResource inputBox}" Width="300" Height="40" >
                         <toolkit:WatermarkTextBox.Watermark>
@@ -35,12 +37,14 @@
                     <toolkit:WatermarkTextBox x:Name="Password" Style="{StaticResource inputBox}" Width="300" Height="40" >
                         <toolkit:WatermarkTextBox.Watermark>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="5 0 0 0">
-                                <Image Source="{StaticResource UsernameIcon}" Width="15" Stretch="Uniform"/>
+                                <Image Source="{StaticResource PasswordIcon}" Width="15" Stretch="Uniform"/>
                                 <TextBlock Text="Password" Margin="8,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
                         </toolkit:WatermarkTextBox.Watermark>
                     </toolkit:WatermarkTextBox>
                 </Border>
+
+                <Button Style="{StaticResource actionButtonStyle}" Content="Log In" x:Name="AuthUser" IsDefault="True"/>
 
             </StackPanel>
 

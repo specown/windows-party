@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WindowsParty.Views"
         mc:Ignorable="d"
-        Title="Tesonet: Windows Party" Height="780" Width="1460" Background="#0b0f27" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="1" BorderBrush="Gray" Visibility="Visible">
+        Title="Tesonet: Windows Party" Height="780" Width="1460" Background="{StaticResource BackgroundColor}" WindowStartupLocation="CenterScreen" BorderThickness="1" BorderBrush="Gray" Visibility="Visible">
     <Grid>
         <ContentControl x:Name="ActiveItem"/>
     </Grid>
