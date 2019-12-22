@@ -15,20 +15,28 @@ namespace WindowsParty.Helpers
     public class WebTasks : IWebTasks
     {
         private RestClient _restClient;
-        private AuthModel _authModel;
         private List<ServerModel> _serverList;
 
         public async Task<AuthModel> AuthenticateUser(UserModel userModel)
         {
-            _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
+            try
+            {
+                //Create rest client based on Base URL
+                _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
 
-            RestRequest restRequest = BuildAuthRequest(userModel);
+                //Build rest Request
+                RestRequest restRequest = BuildAuthRequest(userModel);
 
-            var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
+                //Execture request
+                var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
 
-            _authModel = JsonConvert.DeserializeObject<AuthModel>(restResponse.Content);
-
-            return _authModel;
+                //Deserialize object
+                return JsonConvert.DeserializeObject<AuthModel>(restResponse.Content);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Failed calling authentication service: {0}", ex);
+            }
         }
 
         private RestRequest BuildAuthRequest(UserModel userModel)
@@ -48,23 +56,31 @@ namespace WindowsParty.Helpers
             return restRequest;
         }
 
-        public async Task<List<ServerModel>> RetrieveServerList()
+        public async Task<List<ServerModel>> RetrieveServerList(AuthModel authModel)
         {
-            _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
+            try
+            {
+                _restClient = new RestClient(ConfigurationManager.AppSettings["baseUrl"]);
 
-            RestRequest restRequest = BuildServerRequest(_authModel);
+                RestRequest restRequest = BuildServerRequest(authModel);
 
-            var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
+                var restResponse = await _restClient.ExecuteTaskAsync(restRequest);
 
-            _serverList = JsonConvert.DeserializeObject<List<ServerModel>>(restResponse.Content);
+                _serverList = JsonConvert.DeserializeObject<List<ServerModel>>(restResponse.Content);
 
-            return _serverList;
+                return _serverList;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Failed calling server service: {0}", ex);
+            }
         }
 
         private RestRequest BuildServerRequest(AuthModel authModel)
         {
             var restRequest = new RestRequest(ConfigurationManager.AppSettings["baseUrl"] + ConfigurationManager.AppSettings["serverPath"], Method.GET, DataFormat.Json);
 
+            //Add bearer token to the header
             restRequest.AddHeader("Authorization", "Bearer " + authModel.AuthToken);
 
             return restRequest;
