@@ -93,6 +93,7 @@
     <Compile Include="Events\EventModel.cs" />
     <Compile Include="Events\Status.cs" />
     <Compile Include="Helpers\AuthenticationHelper.cs" />
+    <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\Serializer.cs" />
     <Compile Include="Helpers\WebTasks.cs" />
     <Compile Include="Interfaces\IAuthenticationHelper.cs" />
