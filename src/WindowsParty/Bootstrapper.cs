@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using WindowsParty.Helpers;
 using WindowsParty.Interfaces;
+using WindowsParty.Logging;
 using WindowsParty.ViewModels;
 
 namespace WindowsParty
@@ -34,6 +35,7 @@ namespace WindowsParty
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
+            LogManager.GetLog = type => new DebugLogger(type);
             DisplayRootViewFor<ShellViewModel>();
         }
 

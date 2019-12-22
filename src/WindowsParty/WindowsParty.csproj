@@ -44,8 +44,16 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -84,8 +92,15 @@
     </ApplicationDefinition>
     <Compile Include="Events\EventModel.cs" />
     <Compile Include="Events\Status.cs" />
+    <Compile Include="Helpers\AuthenticationHelper.cs" />
+    <Compile Include="Helpers\Serializer.cs" />
+    <Compile Include="Helpers\WebTasks.cs" />
+    <Compile Include="Interfaces\IAuthenticationHelper.cs" />
+    <Compile Include="Interfaces\IWebTasks.cs" />
+    <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Models\AuthModel.cs" />
     <Compile Include="Models\ServerModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ServerListViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -164,7 +179,9 @@
     <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\ico-lock.png" />
@@ -178,6 +195,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\logotype-testio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ico-logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bg-serverlist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
